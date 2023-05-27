@@ -1,0 +1,96 @@
+{%extends "base.html"%} {%block content%}
+
+<!--================Cart Area =================-->
+<section class="cart_area">
+  <div class="container">
+    <div class="cart_inner">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for item in cart%}
+            <tr>
+              <td>
+                <div class="media">
+                  <div class="d-flex">
+                    <img src="{{ item['img'] }}" alt="{{ item['name'] }}" />
+                  </div>
+                  <div class="media-body">
+                    <p>{{ item['name'] }}</p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <h5>{{ item['price'] }}</h5>
+              </td>
+              <td>
+                <div class="input-group quantity mx-auto" style="width: 100px">
+                  <p>Quantity: {{ item['quantity'] }}</p>
+                  <a
+                    href="{{ url_for('cart.add_quantity', productid=item['_id']) }}"
+                    >+</a
+                  >
+                  <a
+                    href="{{ url_for('cart.remove_quantity', productid=item['_id']) }}"
+                    >-</a
+                  >
+                  <a
+                    href="{{ url_for('cart.remove_product', productid=item['_id']) }}"
+                    >Remove</a
+                  >
+                </div>
+              </td>
+            </tr>
+            {%endfor%}
+            <tr>
+              <td></td>
+              <td>
+                <h5>Subtotal</h5>
+              </td>
+              <td>
+                <h5>{{ total }}</h5>
+              </td>
+            </tr>
+
+            <tr class="out_button_area">
+              <td></td>
+              <td></td>
+              <td>
+                <div class="checkout_btn_inner d-flex align-items-center">
+                  {% if total != 0 %}
+                  <a href="{{ url_for('cart.checkout_cart') }}"
+                    ><button
+                      type="button"
+                      class="btn btn-block btn-primary my-3 py-3"
+                    >
+                      Checkout
+                    </button></a
+                  >
+                  {% else %}
+                  <a href="#"
+                    ><button
+                      type="button"
+                      class="btn btn-block btn-primary my-3 py-3"
+                    >
+                      Checkout
+                    </button></a
+                  >
+                  {% endif %}
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+<!--================End Cart Area =================-->
+
+{%endblock%}
