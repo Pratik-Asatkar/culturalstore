@@ -177,9 +177,8 @@
 								</div>
 								<div class="prd-bottom">
 
-									<a href="" class="social-info">
-										<a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
-										<span class="add-text text-uppercase">Add to Bag</span>
+									<a href="{{ url_for('product.product_info', productid=product['_id']) }}" class="social-info">
+										<a class="primary-btn" href="{{ url_for('product.product_info', productid=product['_id']) }}">Add to Cart</a>
 									</a>
 								</div>
 							</div>
